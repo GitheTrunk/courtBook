@@ -1,15 +1,21 @@
 import 'package:courtbook/widgets/filter_chip_widget.dart';
 import 'package:flutter/material.dart';
 
-class SearchSection extends StatelessWidget {
-  SearchSection({super.key});
+class SearchSection extends StatefulWidget {
+  const SearchSection({super.key});
 
+  @override
+  State<SearchSection> createState() => _SearchSectionState();
+}
+
+class _SearchSectionState extends State<SearchSection> {
   final List<String> filterOptions = [
     'Nearby',
-    'Top Rated',
     'Recommended',
     'Popular',
+    'Top rated',
   ];
+  int selectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -52,24 +58,28 @@ class SearchSection extends StatelessWidget {
           ),
           const SizedBox(height: 20),
           SizedBox(
-            height: 40,
+            height: 48,
             child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
                 children: List.generate(
                   filterOptions.length,
                   (index) => Padding(
-                    padding: EdgeInsets.only(right: 10),
+                    padding: const EdgeInsets.only(right: 10),
                     child: FilterChipWidget(
                       text: filterOptions[index],
-                      selected: index == 0,
+                      selected: selectedIndex == index,
+                      onSelected: (isSelected) {
+                        setState(() {
+                          selectedIndex = isSelected ? index : selectedIndex;
+                        });
+                      },
                     ),
                   ),
                 ),
               ),
             ),
           ),
-          const SizedBox(height: 20),
         ],
       ),
     );

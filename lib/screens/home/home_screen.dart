@@ -1,3 +1,4 @@
+import 'package:courtbook/core/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:courtbook/widgets/search_section.dart';
 import 'package:courtbook/widgets/filter_chip_widget.dart';
@@ -10,7 +11,7 @@ class CourtBook extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'CourtBookApp',
-      theme: ThemeData(primarySwatch: Colors.blue),
+      theme: appTheme,
       home: const HomeScreen(),
     );
   }
@@ -70,17 +71,16 @@ get _appBar => AppBar(
   centerTitle: true,
 );
 
-get _body => Center(
-  child: Column(
-    children: [
-      Column(
-        children: [
-          const SizedBox(height: 20),
-          SearchSection(),
-          const SizedBox(height: 20),
-          FilterChipWidget(),
-        ],
-      ),
-    ],
-  ),
+get _body => Column(
+  children: [
+    Column(
+      children: [
+        const SizedBox(height: 20),
+        SearchSection(),
+        const SizedBox(height: 20),
+        FilterChipWidget(),
+        const SizedBox(height: 20),
+      ],
+    ),
+  ],
 );
