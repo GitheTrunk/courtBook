@@ -21,6 +21,7 @@ class FilterChipWidget extends StatelessWidget {
           fontSize: 14,
           fontWeight: selected ? FontWeight.bold : FontWeight.normal,
         ),
+        maxLines: 1,
       ),
       selected: selected,
       onSelected: onSelected,
