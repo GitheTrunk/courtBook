@@ -47,79 +47,123 @@ class _HomeScreenState extends State<HomeScreen> {
       imagePath: 'assets/icons/badminton.png',
       location: 'Location D',
     ),
+    Club(
+      name: 'Ace Volleyball Club',
+      imagePath: 'assets/icons/volleyball.png',
+      location: 'Location E',
+    ),
+    Club(
+      name: 'Ace Swimming Club',
+      imagePath: 'assets/icons/swimming.png',
+      location: 'Location F',
+    ),
   ];
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(appBar: getAppBar(context), body: getBody(context));
-  }
-
-  AppBar getAppBar(BuildContext context) => AppBar(
-    backgroundColor: Theme.of(context).colorScheme.surfaceContainer,
-    title: Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Row(
-        children: [
-          const CircleAvatar(
-            radius: 20,
-            backgroundImage: AssetImage('assets/images/pf.jpg'),
-          ),
-          const SizedBox(width: 10),
-          Text(
-            'Mann Vanda',
-            style: TextStyle(
-              color: Theme.of(context).colorScheme.onSurface,
-              fontWeight: FontWeight.w600,
-              fontSize: 20,
-            ),
-          ),
-        ],
-      ),
-    ),
-    shape: const RoundedRectangleBorder(
-      borderRadius: BorderRadius.only(
-        bottomLeft: Radius.circular(20),
-        bottomRight: Radius.circular(20),
-      ),
-    ),
-    actions: [
-      Stack(
-        children: [
-          IconButton(
-            icon: Icon(
-              Icons.notifications,
-              color: Theme.of(context).colorScheme.onSurface,
-            ),
-            onPressed: () {
-              debugPrint('Notification button pressed');
-            },
-          ),
-          Positioned(
-            right: 8,
-            top: 8,
-            child: Container(
-              width: 12,
-              height: 12,
-              decoration: const BoxDecoration(
-                color: Colors.red,
-                shape: BoxShape.circle,
+    return Scaffold(
+      body: CustomScrollView(
+        slivers: [
+          SliverAppBar(
+            pinned: true,
+            backgroundColor: Theme.of(context).colorScheme.surfaceContainer,
+            title: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                children: [
+                  const CircleAvatar(
+                    radius: 20,
+                    backgroundImage: AssetImage('assets/images/pf.jpg'),
+                  ),
+                  const SizedBox(width: 10),
+                  Text(
+                    'Trunkkk',
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.onSurface,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 20,
+                    ),
+                  ),
+                ],
               ),
             ),
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(20),
+                bottomRight: Radius.circular(20),
+              ),
+            ),
+            actions: [
+              Stack(
+                children: [
+                  IconButton(
+                    icon: Icon(
+                      Icons.notifications,
+                      color: Theme.of(context).colorScheme.onSurface,
+                    ),
+                    onPressed: () {
+                      debugPrint('Notification button pressed');
+                    },
+                  ),
+                  Positioned(
+                    right: 8,
+                    top: 8,
+                    child: Container(
+                      width: 12,
+                      height: 12,
+                      decoration: const BoxDecoration(
+                        color: Colors.red,
+                        shape: BoxShape.circle,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+            centerTitle: true,
+          ),
+          // SliverToBoxAdapter for SearchSection (pinned)
+          SliverPersistentHeader(
+            pinned: true, // Pins the SearchSection below the AppBar
+            delegate: _SearchSectionDelegate(),
+          ),
+          // SliverList for ClubCard
+          SliverPadding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            sliver: SliverList(
+              delegate: SliverChildBuilderDelegate((context, index) {
+                return ClubCard(club: clubs[index]);
+              }, childCount: clubs.length),
+            ),
           ),
         ],
       ),
-    ],
-    centerTitle: true,
-  );
+    );
+  }
+}
 
-  Widget getBody(BuildContext context) => SingleChildScrollView(
-    child: Column(
-      children: [
-        const SizedBox(height: 20),
-        const SearchSection(),
-        const SizedBox(height: 20),
-        ClubCard(clubs: clubs),
-      ],
-    ),
-  );
+// Delegate for SearchSection in SliverPersistentHeader
+class _SearchSectionDelegate extends SliverPersistentHeaderDelegate {
+  @override
+  Widget build(
+    BuildContext context,
+    double shrinkOffset,
+    bool overlapsContent,
+  ) {
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: const SearchSection(),
+    );
+  }
+
+  @override
+  double get maxExtent => 180.0; // Adjust based on SearchSection height
+
+  @override
+  double get minExtent => 180.0; // Same as maxExtent to prevent shrinking
+
+  @override
+  bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) {
+    return false;
+  }
 }

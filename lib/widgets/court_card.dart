@@ -3,9 +3,9 @@ import 'package:courtbook/models/club_model.dart';
 import 'package:courtbook/screens/booking/booking_screen.dart';
 
 class ClubCard extends StatelessWidget {
-  final List<Club> clubs;
+  final Club club;
 
-  const ClubCard({super.key, required this.clubs});
+  const ClubCard({super.key, required this.club});
 
   @override
   Widget build(BuildContext context) {
@@ -13,10 +13,7 @@ class ClubCard extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
-        children:
-            clubs.map((club) {
-              return _buildClubCard(context, club);
-            }).toList(),
+        children: [_buildClubCard(context, club)],
       ),
     );
   }

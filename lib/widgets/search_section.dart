@@ -20,7 +20,7 @@ class _SearchSectionState extends State<SearchSection> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -28,56 +28,63 @@ class _SearchSectionState extends State<SearchSection> {
             children: [
               Expanded(
                 child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 12, vertical: 14),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 14,
+                  ),
                   decoration: BoxDecoration(
-                    color: Colors.grey,
+                    color: Theme.of(context).colorScheme.surfaceContainer,
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: Row(
                     children: [
-                      Icon(Icons.search, color: Colors.black),
-                      SizedBox(width: 10),
-                      Text(
-                        'Search',
-                        style: TextStyle(color: Colors.black, fontSize: 16),
+                      const Icon(Icons.search, color: Colors.black),
+                      const SizedBox(width: 10),
+                      const Expanded(
+                        child: TextField(
+                          decoration: InputDecoration(
+                            hintText: 'Search',
+                            border: InputBorder.none,
+                            isDense: true,
+                          ),
+                          style: TextStyle(color: Colors.black, fontSize: 16),
+                        ),
                       ),
                     ],
                   ),
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(left: 10),
-                padding: EdgeInsets.symmetric(horizontal: 12, vertical: 14),
+                margin: const EdgeInsets.only(left: 10),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 14,
+                ),
                 decoration: BoxDecoration(
-                  color: Colors.grey,
+                  color: Colors.grey[300],
                   borderRadius: BorderRadius.circular(20),
                 ),
-                child: Icon(Icons.bookmark, color: Colors.black),
+                child: const Icon(Icons.bookmark, color: Colors.black),
               ),
             ],
           ),
           const SizedBox(height: 20),
           SizedBox(
-            height: 48,
-            child: SingleChildScrollView(
+            height: 40,
+            child: ListView.separated(
               scrollDirection: Axis.horizontal,
-              child: Row(
-                children: List.generate(
-                  filterOptions.length,
-                  (index) => Padding(
-                    padding: const EdgeInsets.only(right: 10),
-                    child: FilterChipWidget(
-                      text: filterOptions[index],
-                      selected: selectedIndex == index,
-                      onSelected: (isSelected) {
-                        setState(() {
-                          selectedIndex = isSelected ? index : selectedIndex;
-                        });
-                      },
-                    ),
+              itemCount: filterOptions.length,
+              separatorBuilder: (_, __) => const SizedBox(width: 10),
+              itemBuilder:
+                  (context, index) => FilterChipWidget(
+                    text: filterOptions[index],
+                    selected: selectedIndex == index,
+                    onSelected: (isSelected) {
+                      setState(() {
+                        selectedIndex = isSelected ? index : selectedIndex;
+                      });
+                    },
                   ),
-                ),
-              ),
             ),
           ),
         ],
