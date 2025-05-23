@@ -89,8 +89,8 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(20),
-                bottomRight: Radius.circular(20),
+                bottomLeft: Radius.circular(5),
+                bottomRight: Radius.circular(5),
               ),
             ),
             actions: [
@@ -129,7 +129,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           // SliverList for ClubCard
           SliverPadding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            padding: const EdgeInsets.only(top: 150.0),
             sliver: SliverList(
               delegate: SliverChildBuilderDelegate((context, index) {
                 return ClubCard(club: clubs[index]);
@@ -150,9 +150,22 @@ class _SearchSectionDelegate extends SliverPersistentHeaderDelegate {
     double shrinkOffset,
     bool overlapsContent,
   ) {
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
-      child: const SearchSection(),
+    return ClipRRect(
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              Theme.of(context).colorScheme.surfaceContainer,
+              Theme.of(context).colorScheme.surface,
+            ],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),
+        ),
+
+        child: const SearchSection(),
+      ),
     );
   }
 
