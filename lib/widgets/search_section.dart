@@ -20,7 +20,7 @@ class _SearchSectionState extends State<SearchSection> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
+      padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 12.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -29,12 +29,15 @@ class _SearchSectionState extends State<SearchSection> {
               Expanded(
                 child: Container(
                   padding: const EdgeInsets.symmetric(
-                    horizontal: 12,
-                    vertical: 14,
+                    horizontal: 8,
+                    vertical: 10,
                   ),
                   decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.surfaceContainer,
                     borderRadius: BorderRadius.circular(20),
+                    border: Border.all(
+                      color: Theme.of(context).secondaryHeaderColor,
+                      width: 1,
+                    ),
                   ),
                   child: Row(
                     children: [
@@ -61,7 +64,7 @@ class _SearchSectionState extends State<SearchSection> {
                   vertical: 14,
                 ),
                 decoration: BoxDecoration(
-                  color: Colors.grey[300],
+                  color: Theme.of(context).secondaryHeaderColor,
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: const Icon(Icons.bookmark, color: Colors.black),

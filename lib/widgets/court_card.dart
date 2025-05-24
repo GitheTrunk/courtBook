@@ -67,10 +67,10 @@ class ClubCard extends StatelessWidget {
                     children: [
                       Text(
                         club.name,
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
-                          color: Colors.black87,
+                          color: Theme.of(context).scaffoldBackgroundColor,
                         ),
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
@@ -78,15 +78,20 @@ class ClubCard extends StatelessWidget {
                       const SizedBox(height: 6),
                       Text(
                         club.location,
-                        style: TextStyle(fontSize: 14, color: Colors.grey[600]),
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: Theme.of(context).secondaryHeaderColor,
+                        ),
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                       ),
                       const SizedBox(height: 6),
-
                       Text(
                         'Open 8 AM - 10 PM',
-                        style: TextStyle(fontSize: 12, color: Colors.grey[500]),
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: Theme.of(context).secondaryHeaderColor,
+                        ),
                       ),
                     ],
                   ),
@@ -105,11 +110,11 @@ class ClubCard extends StatelessWidget {
                       vertical: 8,
                     ),
                   ),
-                  child: const Text(
+                  child: Text(
                     'Book',
                     style: TextStyle(
                       fontSize: 14,
-                      color: Colors.blue,
+                      color: Theme.of(context).primaryColor,
                       fontWeight: FontWeight.w500,
                     ),
                   ),

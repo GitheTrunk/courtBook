@@ -79,7 +79,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   Text(
                     'Trunkkk',
                     style: TextStyle(
-                      color: Theme.of(context).colorScheme.onSurface,
+                      color: Theme.of(context).colorScheme.secondary,
                       fontWeight: FontWeight.w600,
                       fontSize: 20,
                     ),
@@ -99,7 +99,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   IconButton(
                     icon: Icon(
                       Icons.notifications,
-                      color: Theme.of(context).colorScheme.onSurface,
+                      color: Theme.of(context).colorScheme.secondary,
                     ),
                     onPressed: () {
                       debugPrint('Notification button pressed');
@@ -156,8 +156,12 @@ class _SearchSectionDelegate extends SliverPersistentHeaderDelegate {
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              Theme.of(context).colorScheme.surfaceContainer,
-              Theme.of(context).colorScheme.surface,
+              Theme.of(
+                context,
+              ).scaffoldBackgroundColor.withAlpha((0.9 * 255).toInt()),
+              Theme.of(
+                context,
+              ).scaffoldBackgroundColor.withAlpha((0.5 * 255).toInt()),
             ],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
