@@ -59,7 +59,7 @@ class ClubCard extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(width: 20),
-
+                const SizedBox(height: 20),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -75,7 +75,7 @@ class ClubCard extends StatelessWidget {
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                       ),
-                      const SizedBox(height: 6),
+                      const SizedBox(height: 10),
                       Text(
                         club.location,
                         style: TextStyle(
