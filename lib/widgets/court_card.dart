@@ -27,6 +27,7 @@ class ClubCard extends StatelessWidget {
         );
       },
       child: Card(
+        color: Theme.of(context).cardTheme.color,
         elevation: 4,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         margin: const EdgeInsets.only(bottom: 16),
