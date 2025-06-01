@@ -1,3 +1,5 @@
+import 'package:courtbook/screens/booking/booking_screen.dart';
+import 'package:courtbook/screens/favorite/favorite_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:courtbook/core/theme.dart';
 import 'package:courtbook/screens/splash/splash_screen.dart';
@@ -19,8 +21,9 @@ class App extends StatelessWidget {
         GetPage(name: '/splash', page: () => const SplashScreen()),
         GetPage(name: '/main', page: () => const MainScreen()),
         GetPage(name: '/home', page: () => const HomeScreen()),
-        GetPage(name: 'favorite', page: () => const HomeScreen()),
+        GetPage(name: '/favorite', page: () => const FavoriteScreen()),
         GetPage(name: '/profile', page: () => const ProfileScreen()),
+        GetPage(name: '/booking', page: () => const BookingScreen()),
       ],
     );
   }

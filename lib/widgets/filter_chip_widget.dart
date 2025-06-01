@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 class FilterChipWidget extends StatelessWidget {
   final String text;
   final bool selected;
-  final ValueChanged<bool>? onSelected;
+  final Function(bool) onSelected;
 
   const FilterChipWidget({
     super.key,
-    this.text = '',
-    this.selected = false,
-    this.onSelected,
+    required this.text,
+    required this.selected,
+    required this.onSelected,
   });
 
   @override
@@ -38,5 +38,10 @@ class FilterChipWidget extends StatelessWidget {
       ),
       showCheckmark: true,
     );
+    // return FilterChip(
+    //   label: Text(text),
+    //   selected: selected,
+    //   onSelected: onSelected,
+    // );
   }
 }

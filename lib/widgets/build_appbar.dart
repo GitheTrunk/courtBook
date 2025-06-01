@@ -2,14 +2,11 @@ import 'package:courtbook/widgets/build_search_section.dart';
 import 'package:courtbook/widgets/user_profile.dart';
 import 'package:flutter/material.dart';
 
-class BuildAppbar extends StatefulWidget {
-  const BuildAppbar({super.key});
+class BuildAppbar extends StatelessWidget {
+  final UserProfile userProfileWidget;
 
-  @override
-  State<BuildAppbar> createState() => _BuildAppbarState();
-}
+  const BuildAppbar({super.key, required this.userProfileWidget});
 
-class _BuildAppbarState extends State<BuildAppbar> {
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
@@ -35,7 +32,7 @@ class _BuildAppbarState extends State<BuildAppbar> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  UserProfile(),
+                  userProfileWidget,
                   const SizedBox(height: 20),
                   BuildSearchSection(),
                 ],
@@ -45,6 +42,5 @@ class _BuildAppbarState extends State<BuildAppbar> {
         ),
       ),
     );
-    ;
   }
 }

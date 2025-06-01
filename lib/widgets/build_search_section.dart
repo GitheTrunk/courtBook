@@ -1,15 +1,12 @@
+import 'package:courtbook/screens/home/home_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:courtbook/widgets/filter_chip_widget.dart';
 
-class BuildSearchSection extends StatefulWidget {
-  const BuildSearchSection({super.key});
+class BuildSearchSection extends StatelessWidget {
+  final TextEditingController _searchController = TextEditingController();
 
-  @override
-  State<BuildSearchSection> createState() => _BuildSearchSectionState();
-}
-
-class _BuildSearchSectionState extends State<BuildSearchSection> {
-  final List<String> _filters = [
+  final List<String> _filters = const [
     'All',
     'Football',
     'Basketball',
@@ -19,15 +16,24 @@ class _BuildSearchSectionState extends State<BuildSearchSection> {
     'Swimming',
   ];
 
-  String _searchQuery = '';
-  Set<String> _selectedFilters = {'All'};
+  BuildSearchSection({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final homeController = Get.find<HomeController>();
+
+    // Sync TextEditingController with HomeController's searchQuery
+    _searchController.text = homeController.searchQuery.value;
+    _searchController.addListener(() {
+      homeController.searchQuery.value = _searchController.text.toLowerCase();
+      debugPrint('Search query: ${homeController.searchQuery.value}');
+    });
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         TextField(
+          controller: _searchController,
           decoration: InputDecoration(
             hintText: 'Search clubs...',
             prefixIcon: const Icon(Icons.search),
@@ -40,54 +46,51 @@ class _BuildSearchSectionState extends State<BuildSearchSection> {
               borderSide: BorderSide.none,
             ),
           ),
-          onChanged: (value) {
-            setState(() {
-              _searchQuery = value.toLowerCase();
-              debugPrint('Search query: $_searchQuery');
-            });
-          },
         ),
         const SizedBox(height: 10),
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
-          child: Row(
-            children: [
-              ..._filters.map(
-                (text) => Padding(
-                  padding: const EdgeInsets.only(right: 8.0),
-                  child: FilterChipWidget(
-                    text: text,
-                    selected: _selectedFilters.contains(text),
-                    onSelected: (selected) {
-                      setState(() {
+          child: Obx(
+            () => Row(
+              children: [
+                ..._filters.map(
+                  (text) => Padding(
+                    padding: const EdgeInsets.only(right: 8.0),
+                    child: FilterChipWidget(
+                      text: text,
+                      selected: homeController.selectedFilters.contains(text),
+                      onSelected: (selected) {
                         if (text == 'All' && selected) {
-                          _selectedFilters = {'All'};
+                          homeController.selectedFilters
+                            ..clear()
+                            ..add('All');
                         } else if (text != 'All') {
                           if (selected) {
-                            _selectedFilters.add(text);
-                            if (_selectedFilters.contains('All')) {
-                              _selectedFilters.remove('All');
+                            homeController.selectedFilters.add(text);
+                            if (homeController.selectedFilters.contains(
+                              'All',
+                            )) {
+                              homeController.selectedFilters.remove('All');
                             }
                           } else {
-                            _selectedFilters.remove(text);
-                            if (_selectedFilters.isEmpty) {
-                              _selectedFilters.add('All');
+                            homeController.selectedFilters.remove(text);
+                            if (homeController.selectedFilters.isEmpty) {
+                              homeController.selectedFilters.add('All');
                             }
                           }
                         }
                         debugPrint(
-                          'Filter selected: $text, $selected, Filters: $_selectedFilters',
+                          'Filter selected: $text, $selected, Filters: ${homeController.selectedFilters}',
                         );
-                      });
-                    },
+                      },
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ],
     );
-    ;
   }
 }
