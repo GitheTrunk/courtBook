@@ -6,13 +6,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+  HomeScreen({super.key});
+  final homeController = Get.put(
+    HomeController(),
+  ); // Use Get.find instead of creating new
 
   @override
   Widget build(BuildContext context) {
-    final homeController =
-        Get.find<HomeController>(); // Use Get.find instead of creating new
-
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(

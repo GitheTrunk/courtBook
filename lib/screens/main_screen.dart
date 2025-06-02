@@ -47,14 +47,14 @@ class _MainScreenState extends State<MainScreen> {
   Widget _getScreen(int index) {
     switch (index) {
       case 0:
-        return const HomeScreen();
+        return HomeScreen();
       case 1:
         return const FavoriteScreen();
       case 2:
         return const ProfileScreen();
       default:
         debugPrint('Unexpected index: $index');
-        return const HomeScreen();
+        return HomeScreen();
     }
   }
 }

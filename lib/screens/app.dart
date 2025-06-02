@@ -20,7 +20,7 @@ class App extends StatelessWidget {
       getPages: [
         GetPage(name: '/splash', page: () => const SplashScreen()),
         GetPage(name: '/main', page: () => const MainScreen()),
-        GetPage(name: '/home', page: () => const HomeScreen()),
+        GetPage(name: '/home', page: () => HomeScreen()),
         GetPage(name: '/favorite', page: () => const FavoriteScreen()),
         GetPage(name: '/profile', page: () => const ProfileScreen()),
         GetPage(name: '/booking', page: () => const BookingScreen()),
