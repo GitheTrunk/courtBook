@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:courtbook/widgets/build_messages.dart';
 
 class FavoriteScreen extends StatefulWidget {
   const FavoriteScreen({super.key});
@@ -10,6 +11,12 @@ class FavoriteScreen extends StatefulWidget {
 class _FavoriteScreenState extends State<FavoriteScreen> {
   @override
   Widget build(BuildContext context) {
-    return Center(child: Text('Favorite Screen'));
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).unfocus(),
+      child: Scaffold(
+        appBar: AppBar(title: const Text('Favorites'), centerTitle: true),
+        body: BuildMessages(),
+      ),
+    );
   }
 }
